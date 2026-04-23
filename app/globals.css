@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 :root {
+  /* Controls at what viewport width the layout switches from full-width to centered.
+     Common MacBook resolutions: 1280px (Air 13"), 1470px (Air 15"), 1512px (Pro 14"), 1728px (Pro 16").
+     Set to 1728px so all MacBooks stay full-width; external monitors (1920px+) get centered layout. */
+  --layout-max-width: 1920px;
   --page-bg: #f4f0ea;
   --panel: rgba(255, 255, 255, 0.72);
   --ink: #171717;

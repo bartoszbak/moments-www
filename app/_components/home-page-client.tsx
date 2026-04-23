@@ -25,7 +25,7 @@ function HomeBrandMark() {
         priority
         className="h-20 w-20 rounded-[24px] object-cover"
       />
-      <span className="text-[17px] font-semibold leading-[17px] tracking-[0.34px]">
+      <span className="text-[17px] font-semibold leading-[17px]">
         Moments
       </span>
     </Link>
@@ -36,7 +36,7 @@ function HomeLegalLinks({ centered = false }: { centered?: boolean }) {
   return (
     <nav
       aria-label="Legal"
-      className={`flex items-center gap-4 text-[17px] font-medium leading-[17px] tracking-[0.34px] text-[#939b9e] ${centered ? "justify-center" : ""}`}
+      className={`flex items-center gap-4 text-[17px] font-medium leading-[17px] text-[#939b9e] ${centered ? "justify-center" : ""}`}
       style={{ fontFeatureSettings: "'ss02' 1, 'liga' 0" }}
     >
       <Link href="/privacy">Privacy</Link>
@@ -63,7 +63,7 @@ function HomeActionRow({ primaryLabel, mobile = false, onOpenFeatures }: HomeAct
       <motion.div whileHover={hoverLift} whileTap={tapPress} transition={hoverTransition}>
         <Link
           href={siteConfig.appStoreUrl}
-          className={`moments-download-button inline-flex items-center justify-center rounded-[16px] bg-[#00b9ff] px-6 text-[17px] font-semibold leading-[17px] tracking-[0.34px] text-black shadow-[0_14px_32px_rgba(0,185,255,0.18)] ${mobile ? "h-[49px] w-full text-center" : "h-[49px]"}`}
+          className={`moments-download-button inline-flex items-center justify-center rounded-[16px] bg-[#00b9ff] px-6 text-[17px] font-semibold leading-[17px] text-black ${mobile ? "h-[49px] w-full text-center" : "h-[49px]"}`}
         >
           {primaryLabel}
         </Link>
@@ -71,7 +71,7 @@ function HomeActionRow({ primaryLabel, mobile = false, onOpenFeatures }: HomeAct
 
       <motion.button
         type="button"
-        className={`moments-features-open-button inline-flex items-center justify-center rounded-[16px] border border-[#d7e9f1] bg-[#f7fcff] px-6 text-[17px] font-semibold leading-[17px] tracking-[0.34px] text-[#0d3545] shadow-[0_10px_26px_rgba(12,30,39,0.05)] ${mobile ? "h-[49px] w-full" : "h-[49px]"}`}
+        className={`moments-features-open-button inline-flex items-center justify-center rounded-[16px] border border-[#d7e9f1] bg-[#f7fcff] px-6 text-[17px] font-semibold leading-[17px] text-[#0d3545] ${mobile ? "h-[49px] w-full" : "h-[49px]"}`}
         whileHover={hoverLift}
         whileTap={tapPress}
         transition={hoverTransition}
@@ -90,7 +90,7 @@ export function HomePageClient() {
     <>
       <div className="bg-white text-black">
         <div className="hidden xl:block">
-          <div className="mx-auto flex min-h-screen w-full max-w-[1440px]">
+          <div className="mx-auto flex min-h-screen w-full" style={{ maxWidth: 'var(--layout-max-width)' }}>
             <section className="flex h-screen w-[689px] flex-col justify-between overflow-hidden p-[42px]">
               <HomeBrandMark />
               <div className="flex w-full flex-col gap-[42px]">
@@ -106,7 +106,7 @@ export function HomePageClient() {
                     manifest what&apos;s next.
                   </h1>
                   <p
-                    className="w-[484px] text-[17px] font-semibold leading-[17px] tracking-[0.34px]"
+                    className="w-[484px] text-[17px] font-semibold leading-[17px]"
                     style={{ fontFeatureSettings: "'ss02' 1, 'liga' 0" }}
                   >
                     Make every moment move you forward.
@@ -115,7 +115,7 @@ export function HomePageClient() {
                 <div className="flex flex-col items-start gap-4">
                   <HomeActionRow primaryLabel="Download Moments" onOpenFeatures={() => setIsFeaturesOpen(true)} />
                   <p
-                    className="pl-[6px] text-[17px] font-medium leading-[17px] tracking-[0.34px] text-[#939b9e]"
+                    className="pl-[6px] text-[17px] font-medium leading-[17px] text-[#939b9e]"
                     style={{ fontFeatureSettings: "'liga' 0" }}
                   >
                     Built for iPhone and iPad.
@@ -155,7 +155,7 @@ export function HomePageClient() {
                       manifest what&apos;s next.
                     </h1>
                     <p
-                      className="text-[17px] font-semibold leading-[17px] tracking-[0.34px]"
+                      className="text-[17px] font-semibold leading-[17px]"
                       style={{ fontFeatureSettings: "'ss02' 1, 'liga' 0" }}
                     >
                       Make every moment move you forward.

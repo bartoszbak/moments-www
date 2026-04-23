@@ -37,7 +37,7 @@ function LegalBrandMark() {
         priority
         className="h-20 w-20 rounded-[24px] object-cover"
       />
-      <span className="text-[17px] font-semibold leading-[17px] tracking-[0.34px]">
+      <span className="text-[17px] font-semibold leading-[17px]">
         Moments
       </span>
     </Link>
@@ -59,20 +59,20 @@ function LegalContent({ document, centeredTitle = false }: LegalPageProps & {
         {document.title}
       </h1>
 
-      <p className="w-full text-[17px] font-semibold leading-[25px] tracking-[0.34px]">
+      <p className="w-full text-[17px] font-semibold leading-[25px]">
         {document.intro}
       </p>
 
       {document.sections.map((section) => (
         <section key={section.heading} className="flex w-full flex-col items-start gap-3">
-          <h2 className="w-full text-[20px] font-semibold leading-[23px] tracking-[0.4px]">
+          <h2 className="w-full text-[20px] font-semibold leading-[23px]">
             {section.heading}
           </h2>
           <div className="flex w-full flex-col gap-3">
             {section.body.map((paragraph) => (
               <p
                 key={paragraph}
-                className="w-full text-[17px] font-normal leading-[25px] tracking-[0.34px]"
+                className="w-full text-[17px] font-normal leading-[25px]"
               >
                 {paragraph}
               </p>
@@ -88,9 +88,11 @@ export function LegalPage({ document }: LegalPageProps) {
   return (
     <div className="bg-white text-black">
       <div className="hidden xl:block">
-        <div className="mx-auto flex min-h-screen w-full max-w-[1440px]">
-          <section className="flex min-h-screen flex-1 flex-col items-start overflow-hidden p-[42px]">
-            <LegalBrandMark />
+        <div className="mx-auto flex min-h-screen w-full" style={{ maxWidth: 'var(--layout-max-width)' }}>
+          <section className="flex min-h-screen flex-1 flex-col items-start p-[42px]">
+            <div className="sticky top-[42px]">
+              <LegalBrandMark />
+            </div>
           </section>
 
           <section className="flex min-h-screen flex-1 flex-col items-start overflow-hidden p-[42px]">

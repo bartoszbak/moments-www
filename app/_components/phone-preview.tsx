@@ -2,7 +2,7 @@
 
 import { hover } from "motion";
 import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 type PhonePreviewProps = {
   variant: "desktop" | "mobile";
@@ -52,7 +52,6 @@ const scaleSpring = {
 export function PhonePreview({ variant }: PhonePreviewProps) {
   const config = previewConfig[variant];
   const frameRef = useRef<HTMLDivElement>(null);
-  const [desktopScale, setDesktopScale] = useState(1);
   const prefersReducedMotion = useReducedMotion();
   const offsetX = useMotionValue(0);
   const offsetY = useMotionValue(0);
@@ -70,15 +69,6 @@ export function PhonePreview({ variant }: PhonePreviewProps) {
   const smoothBaseScale = useSpring(baseScale, scaleSpring);
   const layerScale = useTransform(() => smoothBaseScale.get() * (1 + smoothHoverScale.get()));
   const layerTransform = useMotionTemplate`translate3d(${smoothOffsetX}px, ${smoothOffsetY}px, ${smoothLiftZ}px) rotateX(${smoothRotateX}deg) rotateY(${smoothRotateY}deg) rotate(3.58deg) scale(${layerScale})`;
-
-  useEffect(() => {
-    if (variant === "desktop") {
-      baseScale.set(desktopScale);
-      return;
-    }
-
-    baseScale.jump(1);
-  }, [baseScale, desktopScale, variant]);
 
   useEffect(() => {
     const resetMotion = () => {
@@ -143,58 +133,19 @@ export function PhonePreview({ variant }: PhonePreviewProps) {
     variant,
   ]);
 
-  useEffect(() => {
-    const node = frameRef.current;
-
-    if (!node || variant !== "desktop") {
-      setDesktopScale(1);
-      return;
-    }
-
-    const container = node.parentElement;
-
-    if (!container) {
-      setDesktopScale(1);
-      return;
-    }
-
-    const updateScale = () => {
-      const bounds = container.getBoundingClientRect();
-      const availableWidth = Math.max(bounds.width - 48, config.wrapperWidth);
-      const availableHeight = Math.max(bounds.height - 48, config.wrapperHeight);
-      const nextScale = Math.min(
-        1.28,
-        Math.max(1, Math.min(availableWidth / config.wrapperWidth, availableHeight / config.wrapperHeight)),
-      );
-
-      setDesktopScale((currentScale) => (Math.abs(currentScale - nextScale) < 0.01 ? currentScale : nextScale));
-    };
-
-    updateScale();
-
-    const resizeObserver = new ResizeObserver(() => {
-      updateScale();
-    });
-
-    resizeObserver.observe(container);
-    window.addEventListener("resize", updateScale);
-
-    return () => {
-      resizeObserver.disconnect();
-      window.removeEventListener("resize", updateScale);
-    };
-  }, [config.wrapperHeight, config.wrapperWidth, variant]);
-
-  const previewScale = variant === "desktop" ? desktopScale : 1;
+  const isDesktop = variant === "desktop";
 
   return (
     <div
       ref={frameRef}
       className="phone-preview-frame relative shrink-0"
-      style={{
-        width: `${config.wrapperWidth * previewScale}px`,
-        height: `${config.wrapperHeight * previewScale}px`,
-        perspective: variant === "desktop" ? "1400px" : undefined,
+      style={isDesktop ? {
+        height: "clamp(692px, 77dvh, 1107px)",
+        width: "calc(clamp(692px, 77dvh, 1107px) * (351 / 692))",
+        perspective: "1400px",
+      } : {
+        width: `${config.wrapperWidth}px`,
+        height: `${config.wrapperHeight}px`,
       }}
     >
       <div className="phone-preview-stage absolute inset-0 flex items-center justify-center">
@@ -203,7 +154,7 @@ export function PhonePreview({ variant }: PhonePreviewProps) {
           style={{
             transform: layerTransform,
             transformStyle: "preserve-3d",
-            willChange: variant === "desktop" ? "transform" : undefined,
+            willChange: isDesktop ? "transform" : undefined,
           }}
           initial={false}
         >
@@ -216,8 +167,13 @@ export function PhonePreview({ variant }: PhonePreviewProps) {
             playsInline
             preload="auto"
             aria-label="Moments phone preview video"
-            className="phone-preview-video block h-auto w-auto object-cover"
-            style={{
+            className="phone-preview-video block object-cover"
+            style={isDesktop ? {
+              height: "clamp(674px, 75dvh, 1078px)",
+              width: "auto",
+              aspectRatio: "310 / 674",
+              boxShadow: config.phoneShadow,
+            } : {
               width: `${config.phoneWidth}px`,
               height: `${config.phoneHeight}px`,
               boxShadow: config.phoneShadow,

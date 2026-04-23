@@ -32,7 +32,7 @@ export function BrandMark({ centered = false }: { centered?: boolean }) {
 
 export function SiteFooter() {
   return (
-    <footer className="site-shell mx-auto flex w-full max-w-[1440px] justify-center px-6 pb-8 pt-4 md:justify-end md:px-10 lg:px-12">
+    <footer className="site-shell mx-auto flex w-full justify-center px-6 pb-8 pt-4 md:justify-end md:px-10 lg:px-12" style={{ maxWidth: 'var(--layout-max-width)' }}>
       <nav
         aria-label="Legal"
         className="flex items-center gap-4 text-[0.78rem] text-neutral-500"
