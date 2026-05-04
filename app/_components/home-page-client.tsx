@@ -105,7 +105,7 @@ export function HomePageClient() {
             </div>
           </section>
 
-          <section className="relative flex min-w-0 flex-1 items-center justify-center overflow-hidden p-[42px]">
+          <section className="relative flex min-w-0 flex-1 items-center justify-center p-[42px]">
             <PhonePreview variant="desktop" />
             <div className="absolute bottom-[42px] right-[60px]">
               <HomeLegalLinks />
@@ -116,7 +116,7 @@ export function HomePageClient() {
 
       <div className="lg:hidden">
         <div className="mx-auto flex min-h-screen w-full max-w-[402px] flex-col bg-white">
-          <section className="flex h-[532px] items-center justify-center overflow-hidden">
+          <section className="flex h-[532px] items-center justify-center">
             <PhonePreview variant="mobile" />
           </section>
 
