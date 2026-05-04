@@ -40,10 +40,6 @@ export function SiteFooter() {
         <Link href="/privacy" className="transition hover:text-neutral-900">
           Privacy
         </Link>
-        <span className="h-3 w-px bg-neutral-300" />
-        <Link href="/terms" className="transition hover:text-neutral-900">
-          Terms
-        </Link>
       </nav>
     </footer>
   );

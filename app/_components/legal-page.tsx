@@ -9,12 +9,14 @@ type LegalPageProps = {
 };
 
 export function buildLegalMetadata(document: LegalDocument): Metadata {
+  const description = document.intro.join(" ");
+
   return {
     title: document.title,
-    description: document.intro,
+    description,
     openGraph: {
       title: `${document.title} | ${siteConfig.name}`,
-      description: document.intro,
+      description,
       url: `${siteConfig.siteUrl}/${document.slug}`,
       siteName: siteConfig.name,
     },
@@ -59,9 +61,15 @@ function LegalContent({ document, centeredTitle = false }: LegalPageProps & {
         {document.title}
       </h1>
 
-      <p className="w-full text-[17px] font-semibold leading-[25px]">
-        {document.intro}
+      <p className="w-full text-[17px] font-semibold leading-[25px] text-[#6f777a]">
+        {document.effectiveDate}
       </p>
+
+      {document.intro.map((paragraph) => (
+        <p key={paragraph} className="w-full text-[17px] font-semibold leading-[25px]">
+          {paragraph}
+        </p>
+      ))}
 
       {document.sections.map((section) => (
         <section key={section.heading} className="flex w-full flex-col items-start gap-3">
@@ -69,14 +77,29 @@ function LegalContent({ document, centeredTitle = false }: LegalPageProps & {
             {section.heading}
           </h2>
           <div className="flex w-full flex-col gap-3">
-            {section.body.map((paragraph) => (
-              <p
-                key={paragraph}
-                className="w-full text-[17px] font-normal leading-[25px]"
-              >
-                {paragraph}
-              </p>
-            ))}
+            {section.body.map((block, blockIndex) => {
+              if (block.type === "list") {
+                return (
+                  <ul
+                    key={`${section.heading}-${blockIndex}`}
+                    className="flex w-full list-disc flex-col gap-2 pl-5 text-[17px] font-normal leading-[25px]"
+                  >
+                    {block.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                );
+              }
+
+              return (
+                <p
+                  key={`${section.heading}-${blockIndex}`}
+                  className="w-full text-[17px] font-normal leading-[25px]"
+                >
+                  {block.text}
+                </p>
+              );
+            })}
           </div>
         </section>
       ))}
@@ -87,7 +110,7 @@ function LegalContent({ document, centeredTitle = false }: LegalPageProps & {
 export function LegalPage({ document }: LegalPageProps) {
   return (
     <div className="bg-white text-black">
-      <div className="hidden xl:block">
+      <div className="hidden lg:block">
         <div className="mx-auto flex min-h-screen w-full" style={{ maxWidth: 'var(--layout-max-width)' }}>
           <section className="flex min-h-screen flex-1 flex-col items-start p-[42px]">
             <div className="sticky top-[42px]">
@@ -103,7 +126,7 @@ export function LegalPage({ document }: LegalPageProps) {
         </div>
       </div>
 
-      <div className="xl:hidden">
+      <div className="lg:hidden">
         <div className="mx-auto flex min-h-screen w-full max-w-[402px] flex-col items-center gap-8 overflow-hidden p-8">
           <LegalBrandMark />
           <div className="w-full">

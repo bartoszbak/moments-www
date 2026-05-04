@@ -1,6 +1,6 @@
 # Moments WWW
 
-Marketing site and legal pages for the Moments iOS app.
+Marketing site and privacy policy for the Moments iOS app.
 
 ## Stack
 
@@ -40,7 +40,6 @@ npm run lint
 
 - `/` landing page
 - `/privacy` privacy policy
-- `/terms` terms of use
 - `/robots.txt`
 - `/sitemap.xml`
 

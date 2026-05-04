@@ -6,7 +6,6 @@ Build a responsive Next.js marketing site inspired by the Figma page at `node-id
 
 - `/` home page
 - `/privacy` privacy policy page
-- `/terms` terms of use page
 
 ## Constraints
 
@@ -27,9 +26,9 @@ Build a responsive Next.js marketing site inspired by the Figma page at `node-id
    - large fluid headline
    - primary iOS download CTA
    - phone mockup / app preview treatment
-   - privacy and terms footer links
-4. Write the copy for the privacy and terms pages using the Moments README, privacy draft, and current premium / AI / subscription behavior as source material.
-5. Add the legal content pages and route structure for `/privacy` and `/terms` using that copy.
+   - privacy footer link
+4. Write the copy for the privacy page using the Moments README, privacy draft, and current premium / AI / subscription behavior as source material.
+5. Add the legal content page and route structure for `/privacy` using that copy.
 6. Validate the site with install, lint, and build commands if the environment allows dependency install.
 
 ## Working Notes
@@ -39,5 +38,5 @@ Build a responsive Next.js marketing site inspired by the Figma page at `node-id
 
 ## Status
 
-- Completed: plan file, Next.js scaffold, responsive home page, privacy page, terms page, asset reuse, lint, and production build validation.
+- Completed: plan file, Next.js scaffold, responsive home page, privacy page, asset reuse, lint, and production build validation.
 - Remaining follow-up after handoff: replace the placeholder site URL and generic App Store URL with the final production values when those are available.
