@@ -172,6 +172,7 @@ export function PhonePreview({ variant }: PhonePreviewProps) {
               height: "clamp(674px, 75dvh, 1078px)",
               width: "auto",
               aspectRatio: "310 / 674",
+              borderRadius: "clamp(50px, 5.56dvh, 80px)",
               boxShadow: config.phoneShadow,
             } : {
               width: `${config.phoneWidth}px`,

@@ -22,7 +22,7 @@ export type LegalSection = {
 };
 
 export type LegalDocument = {
-  slug: "privacy";
+  slug: "privacy" | "support";
   title: string;
   effectiveDate: string;
   intro: string[];
@@ -186,6 +186,25 @@ export const legalDocuments: Record<LegalDocument["slug"], LegalDocument> = {
           {
             type: "paragraph",
             text: "Privacy questions and requests should be sent through the support contact provided in the Moments App Store listing or inside the app when available.",
+          },
+        ],
+      },
+    ],
+  },
+  support: {
+    slug: "support",
+    title: "Support",
+    effectiveDate: "Effective date: May 11, 2026",
+    intro: [
+      "Need help with Moments? We're here to make sure your countdowns, reflections, and manifestations keep working the way you expect.",
+    ],
+    sections: [
+      {
+        heading: "Getting in touch",
+        body: [
+          {
+            type: "paragraph",
+            text: "Support requests should be sent through the support contact provided in the Moments App Store listing or inside the app when available.",
           },
         ],
       },

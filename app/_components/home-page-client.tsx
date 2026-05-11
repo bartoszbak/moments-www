@@ -58,7 +58,7 @@ function HomeActionRow({ primaryLabel, mobile = false }: HomeActionRowProps) {
       <motion.div whileHover={hoverLift} whileTap={tapPress} transition={hoverTransition}>
         <Link
           href={siteConfig.appStoreUrl}
-          className={`moments-download-button inline-flex items-center justify-center rounded-[16px] bg-[#00b9ff] px-6 text-[17px] font-semibold leading-[17px] text-black ${mobile ? "h-[49px] w-full text-center" : "h-[49px]"}`}
+          className={`moments-download-button inline-flex items-center justify-center rounded-[16px] bg-[#f8e0d8] px-6 text-[17px] font-semibold leading-[17px] text-black ${mobile ? "h-[49px] w-full text-center" : "h-[49px]"}`}
         >
           {primaryLabel}
         </Link>

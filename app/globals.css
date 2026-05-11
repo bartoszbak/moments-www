@@ -62,7 +62,7 @@ a {
 
 @media (max-width: 1023px) {
   .phone-preview-video {
-    border-radius: 24px;
+    border-radius: 32px;
   }
 }
 
