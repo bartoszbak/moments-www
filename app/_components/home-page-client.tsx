@@ -38,6 +38,7 @@ function HomeLegalLinks({ centered = false }: { centered?: boolean }) {
       style={{ fontFeatureSettings: "'ss02' 1, 'liga' 0" }}
     >
       <Link href="/privacy">Privacy</Link>
+      <Link href="/terms">Terms</Link>
     </nav>
   );
 }
