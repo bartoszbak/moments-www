@@ -8,17 +8,40 @@ type LegalPageProps = {
   document: LegalDocument;
 };
 
+const ogImage = "/og-image.jpg";
+
 export function buildLegalMetadata(document: LegalDocument): Metadata {
-  const description = document.intro.join(" ");
+  const ogTitle = `${document.title} | ${siteConfig.name}`;
+  const imageAlt =
+    "Moments app — countdowns, reflections, and manifestations on iPhone";
 
   return {
     title: document.title,
-    description,
+    description: document.metaDescription,
+    alternates: {
+      canonical: `/${document.slug}`,
+    },
     openGraph: {
-      title: `${document.title} | ${siteConfig.name}`,
-      description,
+      title: ogTitle,
+      description: document.metaDescription,
       url: `${siteConfig.siteUrl}/${document.slug}`,
       siteName: siteConfig.name,
+      type: "website",
+      locale: "en_US",
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 628,
+          alt: imageAlt,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description: document.metaDescription,
+      images: [ogImage],
     },
   };
 }
@@ -127,7 +150,7 @@ export function LegalPage({ document }: LegalPageProps) {
       </div>
 
       <div className="lg:hidden">
-        <div className="mx-auto flex min-h-screen w-full max-w-[402px] flex-col items-center gap-8 overflow-hidden p-8">
+        <div className="mx-auto flex min-h-screen w-full max-w-[448px] flex-col items-center gap-8 overflow-hidden p-8">
           <LegalBrandMark />
           <div className="w-full">
             <LegalContent document={document} centeredTitle />

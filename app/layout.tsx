@@ -29,29 +29,52 @@ const momentsDisplay = localFont({
   ],
 });
 
+const defaultTitle = "Moments — Count down, reflect, manifest on iOS";
+const twitterTitle = "Moments — Count down, reflect, manifest";
+const ogImage = "/og-image.jpg";
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
   title: {
-    default: "Moments",
+    default: defaultTitle,
     template: "%s | Moments",
   },
   description: siteConfig.description,
   applicationName: "Moments",
-  icons: {
-    icon: "/moments-icon.png",
-    apple: "/moments-icon.png",
+  authors: [{ name: "Bart Bak" }],
+  alternates: {
+    canonical: "/",
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  appleWebApp: {
+    title: "Moments",
+    capable: true,
+    statusBarStyle: "default",
   },
   openGraph: {
-    title: "Moments",
+    title: defaultTitle,
     description: siteConfig.description,
     siteName: "Moments",
     url: siteConfig.siteUrl,
     type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 628,
+        alt: "Moments app — countdowns, reflections, and manifestations on iPhone",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Moments",
-    description: siteConfig.description,
+    title: twitterTitle,
+    description:
+      "A calm iPhone app for the days that matter. Countdowns, reflections, and manifestations — private by design.",
+    images: [ogImage],
   },
 };
 
@@ -74,6 +97,26 @@ export default function RootLayout({
           as="image"
           href="/moments-mobile-hero.jpg"
           media="(max-width: 1023px)"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "MobileApplication",
+              name: "Moments",
+              operatingSystem: "iOS",
+              applicationCategory: "LifestyleApplication",
+              description: siteConfig.description,
+              url: siteConfig.siteUrl,
+              offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "USD",
+              },
+              author: { "@type": "Person", name: "Bart Bak" },
+            }),
+          }}
         />
       </head>
       <body>{children}</body>

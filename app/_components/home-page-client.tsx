@@ -139,7 +139,7 @@ export function HomePageClient() {
       </div>
 
       <div className="lg:hidden">
-        <div className="mx-auto flex h-[100dvh] w-full max-w-[402px] flex-col bg-white">
+        <div className="mx-auto flex h-[100dvh] w-full max-w-[448px] flex-col bg-white">
           <div
             aria-hidden="true"
             className="min-h-0 w-full flex-1 bg-cover bg-bottom bg-no-repeat"

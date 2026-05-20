@@ -1,9 +1,9 @@
 export const siteConfig = {
   name: "Moments",
   appStoreUrl: "https://apps.apple.com",
-  siteUrl: "https://moments.local",
+  siteUrl: "https://savemoments.app",
   description:
-    "Count down to what matters, reflect on the past, and manifest what comes next with a calm, tactile iOS experience.",
+    "Moments is a calm, tactile iPhone app for counting down to what matters, reflecting on the past, and manifesting what's next. Private by design. Free to start.",
 } as const;
 
 export type LegalTextBlock =
@@ -25,6 +25,7 @@ export type LegalDocument = {
   slug: "privacy" | "terms" | "support";
   title: string;
   effectiveDate: string;
+  metaDescription: string;
   intro: string[];
   sections: LegalSection[];
 };
@@ -34,6 +35,8 @@ export const legalDocuments: Record<LegalDocument["slug"], LegalDocument> = {
     slug: "privacy",
     title: "Privacy Policy",
     effectiveDate: "Effective date: May 3, 2026",
+    metaDescription:
+      "Moments is designed to keep your countdowns, reflections, and manifestations on your device. Read the full privacy policy.",
     intro: [
       "Moments is designed to keep your personal countdowns, reflections, manifestations, photos, widget settings, and preferences primarily on your device. You do not need to create an account to use the app.",
       "This policy explains what information is processed when you use Moments, including optional AI features, subscriptions, widgets, calendar sync, notifications, photo features, and this website.",
@@ -195,6 +198,8 @@ export const legalDocuments: Record<LegalDocument["slug"], LegalDocument> = {
     slug: "terms",
     title: "Terms of Use",
     effectiveDate: "Effective date: May 16, 2026",
+    metaDescription:
+      "Terms of Use for Moments — the iPhone app for countdowns, reflections, and manifestations. Read the full agreement before you use the app.",
     intro: [
       "These Terms of Use govern your access to and use of Moments' website, support materials, app features, premium features, AI-assisted features, related content, and services. Moments is owned and operated by Bart Bak.",
       "If you download Moments from the Apple App Store and no custom end user license agreement is provided in App Store Connect, your license to use the iOS app is governed by Apple's standard Licensed Application End User License Agreement. These Terms apply separately to Moments' features, content, purchases, services, website, and support materials, except where Apple's standard EULA or Apple's terms control.",
@@ -510,6 +515,8 @@ export const legalDocuments: Record<LegalDocument["slug"], LegalDocument> = {
     slug: "support",
     title: "Support",
     effectiveDate: "Effective date: May 11, 2026",
+    metaDescription:
+      "Need help with Moments? Get in touch through the App Store listing or in-app contact.",
     intro: [
       "Need help with Moments? We're here to make sure your countdowns, reflections, and manifestations keep working the way you expect.",
     ],
