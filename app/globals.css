@@ -34,6 +34,7 @@ body {
   background: #fff;
   color: var(--ink);
   font-family: var(--font-inter), "Inter", "SF Pro Text", sans-serif;
+  font-variation-settings: "opsz" 32;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }

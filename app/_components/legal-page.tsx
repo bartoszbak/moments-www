@@ -31,7 +31,7 @@ function LegalBrandMark() {
       aria-label="Moments home"
     >
       <Image
-        src="/moments-icon-figma.png"
+        src="/moments-icon.png"
         alt="Moments app icon"
         width={1024}
         height={1024}

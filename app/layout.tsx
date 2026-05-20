@@ -8,6 +8,25 @@ const inter = localFont({
   variable: "--font-inter",
   display: "swap",
   src: "./fonts/InterVariable.woff2",
+  weight: "100 900",
+  style: "normal",
+});
+
+const momentsDisplay = localFont({
+  variable: "--font-display-primary",
+  display: "swap",
+  src: [
+    {
+      path: "./fonts/moments-display-medium.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/moments-display-medium-italic.otf",
+      weight: "500",
+      style: "italic",
+    },
+  ],
 });
 
 export const metadata: Metadata = {
@@ -19,8 +38,8 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   applicationName: "Moments",
   icons: {
-    icon: "/moments-icon-figma.png",
-    apple: "/moments-icon-figma.png",
+    icon: "/moments-icon.png",
+    apple: "/moments-icon.png",
   },
   openGraph: {
     title: "Moments",
@@ -48,7 +67,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} ${momentsDisplay.variable}`}>
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/moments-mobile-hero.jpg"
+          media="(max-width: 1023px)"
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

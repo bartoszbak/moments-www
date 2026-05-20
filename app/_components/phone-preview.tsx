@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { hover } from "motion";
 import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react";
 import { useEffect, useRef } from "react";
@@ -22,11 +23,12 @@ const previewConfig = {
     maxLift: 24,
   },
   mobile: {
-    wrapperWidth: 213,
-    wrapperHeight: 420,
-    phoneWidth: 188,
-    phoneHeight: 409,
-    phoneShadow: "6.073px 14.575px 38.868px rgba(0, 0, 0, 0.12)",
+    wrapperWidth: 1108,
+    wrapperHeight: 1452,
+    phoneWidth: 1108,
+    phoneHeight: 1452,
+    phoneAspectRatio: "1108 / 1452",
+    phoneShadow: "none",
     maxRotateX: 0,
     maxRotateY: 0,
     maxShiftX: 0,
@@ -50,6 +52,7 @@ const scaleSpring = {
 };
 
 export function PhonePreview({ variant }: PhonePreviewProps) {
+  const isDesktop = variant === "desktop";
   const config = previewConfig[variant];
   const frameRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -68,7 +71,8 @@ export function PhonePreview({ variant }: PhonePreviewProps) {
   const smoothHoverScale = useSpring(hoverScale, scaleSpring);
   const smoothBaseScale = useSpring(baseScale, scaleSpring);
   const layerScale = useTransform(() => smoothBaseScale.get() * (1 + smoothHoverScale.get()));
-  const layerTransform = useMotionTemplate`translate3d(${smoothOffsetX}px, ${smoothOffsetY}px, ${smoothLiftZ}px) rotateX(${smoothRotateX}deg) rotateY(${smoothRotateY}deg) rotate(3.58deg) scale(${layerScale})`;
+  const baseRotate = isDesktop ? "3.58deg" : "0deg";
+  const layerTransform = useMotionTemplate`translate3d(${smoothOffsetX}px, ${smoothOffsetY}px, ${smoothLiftZ}px) rotateX(${smoothRotateX}deg) rotateY(${smoothRotateY}deg) rotate(${baseRotate}) scale(${layerScale})`;
 
   useEffect(() => {
     const resetMotion = () => {
@@ -133,8 +137,6 @@ export function PhonePreview({ variant }: PhonePreviewProps) {
     variant,
   ]);
 
-  const isDesktop = variant === "desktop";
-
   return (
     <div
       ref={frameRef}
@@ -144,8 +146,9 @@ export function PhonePreview({ variant }: PhonePreviewProps) {
         width: "calc(clamp(692px, 77dvh, 1107px) * (351 / 692))",
         perspective: "1400px",
       } : {
-        width: `${config.wrapperWidth}px`,
-        height: `${config.wrapperHeight}px`,
+        width: "90vw",
+        maxWidth: "362px",
+        aspectRatio: `${config.wrapperWidth} / ${config.wrapperHeight}`,
       }}
     >
       <div className="phone-preview-stage absolute inset-0 flex items-center justify-center">
@@ -158,28 +161,36 @@ export function PhonePreview({ variant }: PhonePreviewProps) {
           }}
           initial={false}
         >
-          <video
-            src="/moments-preview.mp4"
-            poster="/phone-preview-figma.png"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            aria-label="Moments phone preview video"
-            className="phone-preview-video block object-cover"
-            style={isDesktop ? {
-              height: "clamp(674px, 75dvh, 1078px)",
-              width: "auto",
-              aspectRatio: "310 / 674",
-              borderRadius: "clamp(50px, 5.56dvh, 80px)",
-              boxShadow: config.phoneShadow,
-            } : {
-              width: `${config.phoneWidth}px`,
-              height: `${config.phoneHeight}px`,
-              boxShadow: config.phoneShadow,
-            }}
-          />
+          {isDesktop ? (
+            <video
+              src="/moments-preview.mp4"
+              poster="/phone-preview-figma.png"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              aria-label="Moments phone preview video"
+              className="phone-preview-video block object-cover"
+              style={{
+                height: "clamp(674px, 75dvh, 1078px)",
+                width: "auto",
+                aspectRatio: "310 / 674",
+                borderRadius: "clamp(50px, 5.56dvh, 80px)",
+                boxShadow: config.phoneShadow,
+              }}
+            />
+          ) : (
+            <Image
+              src="/moments-preview-mobile.png"
+              alt="Grid of Moments cards previewing the app"
+              width={1108}
+              height={1452}
+              priority
+              sizes="(max-width: 1023px) 90vw, 320px"
+              className="block h-auto w-[154.69vw] max-w-[550px]"
+            />
+          )}
         </motion.div>
       </div>
     </div>

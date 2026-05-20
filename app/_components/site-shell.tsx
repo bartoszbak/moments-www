@@ -15,7 +15,7 @@ export function BrandMark({ centered = false }: { centered?: boolean }) {
     >
       <span className="relative h-14 w-14 overflow-hidden rounded-[18px] border border-white/60 shadow-[0_12px_30px_rgba(99,169,255,0.2)]">
         <Image
-          src="/moments-icon-figma.png"
+          src="/moments-icon.png"
           alt="Moments app icon"
           fill
           sizes="56px"

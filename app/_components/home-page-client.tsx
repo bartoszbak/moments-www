@@ -15,7 +15,7 @@ function HomeBrandMark() {
       aria-label="Moments home"
     >
       <Image
-        src="/moments-icon-figma.png"
+        src="/moments-icon.png"
         alt="Moments app icon"
         width={1024}
         height={1024}
@@ -38,6 +38,7 @@ function HomeLegalLinks({ centered = false }: { centered?: boolean }) {
       style={{ fontFeatureSettings: "'ss02' 1, 'liga' 0" }}
     >
       <Link href="/privacy">Privacy</Link>
+      {centered && <span aria-hidden="true" className="h-3 w-px bg-[#939b9e]" />}
       <Link href="/terms">Terms</Link>
     </nav>
   );
@@ -59,9 +60,28 @@ function HomeActionRow({ primaryLabel, mobile = false }: HomeActionRowProps) {
       <motion.div whileHover={hoverLift} whileTap={tapPress} transition={hoverTransition}>
         <Link
           href={siteConfig.appStoreUrl}
-          className={`moments-download-button inline-flex items-center justify-center rounded-[16px] bg-[#f8e0d8] px-6 text-[17px] font-semibold leading-[17px] text-black ${mobile ? "h-[49px] w-full text-center" : "h-[49px]"}`}
+          className={`moments-download-button text-[17px] font-semibold leading-[17px] text-black ${
+            mobile
+              ? "flex w-full items-center justify-between rounded-[20px] bg-[#f5f5f5] p-[20px]"
+              : "inline-flex h-[49px] items-center justify-center rounded-[16px] bg-[#f8e0d8] px-6"
+          }`}
         >
-          {primaryLabel}
+          {mobile ? (
+            <>
+              <span className="pl-3">{primaryLabel}</span>
+              <Image
+                src="/moments-icon.png"
+                alt=""
+                aria-hidden="true"
+                width={36}
+                height={36}
+                sizes="36px"
+                className="rounded-[9px]"
+              />
+            </>
+          ) : (
+            primaryLabel
+          )}
         </Link>
       </motion.div>
     </div>
@@ -78,14 +98,17 @@ export function HomePageClient() {
             <div className="flex w-full flex-col gap-[42px]">
               <div className="flex w-full flex-col gap-3">
                 <h1
-                  className="text-[50px] font-semibold leading-[55px]"
+                  className="font-[family-name:var(--font-display-primary)] text-[50px] font-medium leading-[55px]"
                   style={{ fontFeatureSettings: "'liga' 0" }}
                 >
-                  Count down to events,
+                  <span className="italic">Count down</span>
+                  <span>{` to events,`}</span>
                   <br />
-                  reflect on the past, and
+                  <span className="italic">reflect</span>
+                  <span>{` on the past, and`}</span>
                   <br />
-                  manifest what&apos;s next.
+                  <span className="italic">manifest</span>
+                  <span>{` what’s next.`}</span>
                 </h1>
                 <p
                   className="w-[484px] text-[17px] font-semibold leading-[17px]"
@@ -116,40 +139,40 @@ export function HomePageClient() {
       </div>
 
       <div className="lg:hidden">
-        <div className="mx-auto flex min-h-screen w-full max-w-[402px] flex-col bg-white">
-          <section className="flex h-[532px] items-center justify-center">
-            <PhonePreview variant="mobile" />
-          </section>
+        <div className="mx-auto flex h-[100dvh] w-full max-w-[402px] flex-col bg-white">
+          <div
+            aria-hidden="true"
+            className="min-h-0 w-full flex-1 bg-cover bg-bottom bg-no-repeat"
+            style={{
+              backgroundImage:
+                "linear-gradient(to bottom, #fff 6.604%, rgba(255,255,255,0.5) 22.017%, rgba(255,255,255,0) 39.727%), url('/moments-mobile-hero.jpg')",
+            }}
+          />
 
-          <section className="flex flex-1 flex-col px-8 pb-8 pt-8">
-            <div className="flex flex-1 flex-col items-center justify-between gap-10">
-              <HomeBrandMark />
-              <div className="flex w-full flex-col gap-[42px]">
-                <div className="flex w-full flex-col gap-3 text-center">
-                  <h1
-                    className="text-[27px] font-semibold leading-[normal]"
-                    style={{ fontFeatureSettings: "'liga' 0" }}
-                  >
-                    Count down to events,
-                    <br />
-                    reflect on the past, and
-                    <br />
-                    manifest what&apos;s next.
-                  </h1>
-                  <p
-                    className="text-[17px] font-semibold leading-[17px]"
-                    style={{ fontFeatureSettings: "'ss02' 1, 'liga' 0" }}
-                  >
-                    Make every moment move you forward.
-                  </p>
-                </div>
-                <HomeActionRow primaryLabel="Download Moments for iOS" mobile />
-              </div>
+          <div className="flex w-full shrink-0 flex-col bg-white pb-[max(24px,env(safe-area-inset-bottom))]">
+            <div className="flex w-full flex-col gap-3 px-8 pb-8 pt-8 text-center">
+              <h1
+                className="font-[family-name:var(--font-display-primary)] text-[30px] font-medium leading-[1.15] text-black"
+                style={{ fontFeatureSettings: "'liga' 0" }}
+              >
+                <span className="italic">Count down</span>
+                <span>{` to events, `}</span>
+                <span className="italic">reflect</span>
+                <span>{` on the past, and `}</span>
+                <span className="italic">manifest</span>
+                <span>{` what’s next.`}</span>
+              </h1>
+              <p
+                className="text-[17px] font-medium leading-[17px]"
+                style={{ fontFeatureSettings: "'ss02' 1, 'liga' 0" }}
+              >
+                Make every moment move you forward.
+              </p>
             </div>
-          </section>
-
-          <div className="pb-[39px]">
-            <HomeLegalLinks centered />
+            <div className="flex w-full flex-col items-center gap-6 px-4">
+              <HomeActionRow primaryLabel="Get Moments for iOS" mobile />
+              <HomeLegalLinks centered />
+            </div>
           </div>
         </div>
       </div>
