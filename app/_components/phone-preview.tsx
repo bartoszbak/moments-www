@@ -142,8 +142,8 @@ export function PhonePreview({ variant }: PhonePreviewProps) {
       ref={frameRef}
       className="phone-preview-frame relative shrink-0"
       style={isDesktop ? {
-        height: "clamp(692px, 77dvh, 1107px)",
-        width: "calc(clamp(692px, 77dvh, 1107px) * (351 / 692))",
+        height: "min(77dvh, 1107px)",
+        width: "calc(min(77dvh, 1107px) * (351 / 692))",
         perspective: "1400px",
       } : {
         width: "90vw",
@@ -173,10 +173,10 @@ export function PhonePreview({ variant }: PhonePreviewProps) {
               aria-label="Moments phone preview video"
               className="phone-preview-video block object-cover"
               style={{
-                height: "clamp(674px, 75dvh, 1078px)",
+                height: "min(75dvh, 1078px)",
                 width: "auto",
                 aspectRatio: "310 / 674",
-                borderRadius: "clamp(50px, 5.56dvh, 80px)",
+                borderRadius: "min(5.56dvh, 80px)",
                 boxShadow: config.phoneShadow,
               }}
             />
