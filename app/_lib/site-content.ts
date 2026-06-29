@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Moments",
-  appStoreUrl: "https://apps.apple.com",
+  appStoreUrl: "https://apps.apple.com/search?term=Moments%20Till%20App%20Counter",
   siteUrl: "https://savemoments.app",
   description:
     "Moments is a calm, tactile iPhone app for counting down to what matters, reflecting on the past, and manifesting what's next. Private by design. Free to start.",
